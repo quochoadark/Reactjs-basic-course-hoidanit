@@ -1,12 +1,22 @@
-
 const TodoData = (props) => {
-    const { name, age, data } = props  // Lấy ra 3 giá trị của props
-    console.log("Check props: ", props)
+    const { todoList, deleteTodo } = props;
+
+    const handleClick = (id) => {
+        deleteTodo(id)
+    }
+
     return (
-        <div className="todo-data">
-            <div>My name is {name}</div>
-            <div>Learning React</div>
-            <div>Watching Youtube</div>
+        <div className='todo-data'>
+            {todoList.map((item, index) => {
+                return (
+                    <div className={`todo-item`} key={item.id}>
+                        <div> {item.name}</div>
+                        <button
+                            onClick={() => handleClick(item.id)}
+                            style={{ cursor: "pointer" }}>Delete</button>
+                    </div>
+                )
+            })}
         </div>
     )
 }
